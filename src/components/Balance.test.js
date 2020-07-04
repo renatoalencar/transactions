@@ -6,5 +6,5 @@ import transactions from './samples/transactions';
 test('it should show the correct balance', () => {
   const balance = render(<Balance transactions={transactions} />);
 
-  expect(balance.getByText('Balance: R$ 12.71')).toBeInTheDocument();
+  expect(balance.getByText('Balance: R$12.71')).toBeInTheDocument();
 })

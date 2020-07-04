@@ -1,5 +1,7 @@
 import React, { memo } from 'react';
 
+import { formatCurrency } from '../util';
+
 function compareTransactions(a, b) {
   return b.createdAt - a.createdAt;
 }
@@ -10,7 +12,7 @@ function TransactionList({ transactions }) {
      {transactions.sort(compareTransactions).map((t) =>
         <li key={t.id} data-time={t.createdAt}>
           <b>{t.description}</b>
-          <i>R$ {t.value}</i>
+          <i>{formatCurrency(t.value)}</i>
 
           <small>{t.createdAt}</small>
         </li>

@@ -14,8 +14,8 @@ test('adding a transaction', async () => {
   fireEvent.click(app.getByText(/add/i));
 
   expect(app.getByText(/a coffee/)).toBeInTheDocument();
-  expect(app.getByText('R$ 2.75')).toBeInTheDocument();
-  expect(app.getByText('Balance: R$ 2.75')).toBeInTheDocument();
+  expect(app.getByText('R$2.75')).toBeInTheDocument();
+  expect(app.getByText('Balance: R$2.75')).toBeInTheDocument();
 });
 
 describe('cant add invalid transaction', () => {
@@ -28,7 +28,7 @@ describe('cant add invalid transaction', () => {
     /* The description field is left empty */
     fireEvent.click(app.getByText(/add/i));
 
-    expect(app.queryAllByText('R$ 2.75')).toHaveLength(0);
+    expect(app.queryAllByText('R$2.75')).toHaveLength(0);
   });
 
   test('with value empty', () => {
