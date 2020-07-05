@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 
+import { classnames } from '../util';
 import './TransactionForm.css';
 
 function eventValue(changer, parser) {
@@ -11,17 +12,21 @@ function isEmpty(value) {
   return value === undefined
          || value === null
          || value.length === 0
-         || value === {};
+         || value === {}
+         || Number.isNaN(value);
 }
 
 
-function Field({ id, type, onChange, value, children }) {
+function Field({ id, type, onChange, value, placeholder, children }) {
   return (
     <div className="field">
       <label htmlFor={id}>{children}</label>
       <input
         id={id}
         value={value}
+        type={type}
+        placeholder={placeholder}
+        autocomplete="off"
         onChange={onChange}/>
     </div>
   );
@@ -51,6 +56,7 @@ export default function TransactionForm({ onAdd, onClose }) {
         id="description"
         type="text"
         value={description}
+        placeholder="a coffee, a donut, mommy's deposit"
         onChange={eventValue(setDescription)}>
         Description
       </Field>
@@ -58,9 +64,20 @@ export default function TransactionForm({ onAdd, onClose }) {
       <Field
         id="value"
         type="number"
+        placeholder="R$ 5,00"
         value={value}
         onChange={eventValue(setValue, parseFloat)}>
         Value
+
+        <button
+          className={classnames({
+            InputTypeButton: true,
+            input: value >= 0,
+            output: value < 0,
+          })}
+          onClick={() => (!isEmpty(value) && setValue(-value))}>
+          {value >= 0 ? '+input' : '-output'}
+        </button>
       </Field>
 
       <div className="field">

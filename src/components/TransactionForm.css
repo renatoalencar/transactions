@@ -14,7 +14,7 @@
   border: none;
   background: #f0efeb;
   width: calc(100% - 40px);
-  padding: 10px 20px;
+  padding: 20px 20px;
   font-size: 14px;
   color: #3d405b;
 }
@@ -46,4 +46,26 @@
   font-size: 30px;
   float: right;
   transform: rotate(45deg);
+}
+
+.TransactionForm .field .InputTypeButton {
+  background: none;
+  display: inline;
+  float: right;
+  width: auto;
+  height: auto;
+  font-size: 14px;
+  margin-top: 2px;
+}
+
+.TransactionForm .field .InputTypeButton.input {
+  color: #43aa8b;
+}
+
+.TransactionForm .field .InputTypeButton.output {
+  color: #f94144;
+}
+
+.TransactionForm {
+  width: 340px;
 }
