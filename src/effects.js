@@ -1,8 +1,20 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { v4 as uuid } from 'uuid';
 
+const storage = {
+  key: '::transactions',
+
+  load() {
+    return JSON.parse(localStorage.getItem(this.key));
+  },
+
+  persist(transactions) {
+    localStorage.setItem(this.key, JSON.stringify(transactions));
+  },
+};
+
 export function useTransactions() {
-  const [transactions, setTransactions] = useState([]);
+  const [transactions, setTransactions] = useState(storage.load() || []);
 
   function addTransaction(t) {
     setTransactions([
@@ -14,6 +26,10 @@ export function useTransactions() {
        },
     ]);
   }
+
+  useEffect(() => {
+    storage.persist(transactions);
+  }, [transactions]);
 
   function clearTransactions() {
     setTransactions([]);
