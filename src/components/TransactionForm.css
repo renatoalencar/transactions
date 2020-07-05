@@ -1,0 +1,49 @@
+.form .field {
+  overflow: hidden;
+}
+
+.form .field label {
+  font-size: 18px;
+  font-weight: bold;
+  color: #577590;
+  padding: 10px 20px;;
+  display: block;
+}
+
+.form .field input {
+  border: none;
+  background: #f0efeb;
+  width: calc(100% - 40px);
+  padding: 10px 20px;
+  font-size: 14px;
+  color: #3d405b;
+}
+
+.form .field:last-child * {
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+.field button {
+  background: #43aa8b;
+  border: none;
+  color: white;
+  font-size: 18px;
+  width: 100%;
+  height: 50px;
+}
+
+.form header {
+  padding: 20px;
+  font-size: 20px;
+  color: #43aa8b;
+  font-weight: bold;
+}
+
+.form header button.close {
+  background: none;
+  border: none;
+  font-size: 30px;
+  float: right;
+  transform: rotate(45deg);
+}

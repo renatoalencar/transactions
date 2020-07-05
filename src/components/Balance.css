@@ -1,0 +1,24 @@
+.Balance {
+  font-weight: bold;
+  font-size: 28px;
+  color: #577590;
+  text-align: left;
+}
+
+.Balance span {
+  font-size: 10px;
+  display: block;
+  font-weight: lighter;
+  padding-left: 1px;
+}
+
+.Balance button {
+  float: right;
+  background: #43aa8b;
+  border: none;
+  color: white;
+  font-size: 28px;
+  width: 40px;
+  height: 40px;
+  border-radius: 2px;
+}

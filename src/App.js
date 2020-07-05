@@ -1,37 +1,43 @@
-import React, { useState } from 'react';
-import { v4 as uuid } from 'uuid';
+import React from 'react';
 
 import Balance from './components/Balance';
 import TransactionForm from './components/TransactionForm';
 import TransactionList from './components/TransactionList';
 
 import './App.css';
+import { classnames } from './util';
+import { useToggle, useTransactions } from './effects';
 
-function useTransactions() {
-  const [transactions, setTransactions] = useState([]);
-
-  function addTransaction(t) {
-    setTransactions([
-       ...transactions,
-       {
-         ...t,
-         id: uuid(),
-         createdAt: Date.now(),
-       },
-    ]);
-  }
-
-  return [transactions, addTransaction];
+function EmptyState() {
+  return <p className="EmptyState">
+           It looks like you don't have any transactions yet.
+         </p>;
 }
 
 function App() {
-  const [transactions, addTransaction] = useTransactions();
+  const [transactions, addTransaction, clearTransactions] = useTransactions();
+  const [showForm, toggleForm] = useToggle(false);
   
   return (
     <div className="App">
-      <Balance transactions={transactions}/>
-      <TransactionForm onAdd={addTransaction} />
-      <TransactionList transactions={transactions} />
+      <div className={classnames({
+          box: true,
+          hidden: showForm,
+        })}>
+        <Balance transactions={transactions} onAdd={toggleForm}/>
+        {transactions.length > 0
+         ? <>
+             <TransactionList transactions={transactions} />
+             <button className="clear" onClick={clearTransactions}>
+               Clear
+             </button>
+           </>
+         : <EmptyState />}
+      </div>
+
+      <div className={classnames({ hidden: !showForm })}>
+        <TransactionForm onAdd={addTransaction} onClose={toggleForm}/>
+      </div>
     </div>
   );
 }

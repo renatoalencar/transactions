@@ -1,20 +1,20 @@
 import React, { memo } from 'react';
 
-import { formatCurrency } from '../util';
-
-function compareTransactions(a, b) {
-  return b.createdAt - a.createdAt;
-}
+import './TransactionList.css';
+import CoolTime from './CoolTime';
+import { formatCurrency, compareTransactions } from '../util';
 
 function TransactionList({ transactions }) {
   return (
-    <ul>
+    <ul className="TransactionList">
      {transactions.sort(compareTransactions).map((t) =>
         <li key={t.id} data-time={t.createdAt}>
           <b>{t.description}</b>
-          <i>{formatCurrency(t.value)}</i>
+          <i className={t.value < 0 ? 'negative' : ''}>
+            {formatCurrency(t.value)}
+          </i>
 
-          <small>{t.createdAt}</small>
+          <CoolTime time={t.createdAt}/>
         </li>
      )}
     </ul>
