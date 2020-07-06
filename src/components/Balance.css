@@ -1,24 +1,23 @@
 .Balance {
   font-weight: bold;
   font-size: 28px;
-  color: #577590;
+  color: var(--text-color);
   text-align: left;
 }
 
-.Balance span {
+.Balance .Balance__label {
   font-size: 10px;
   display: block;
   font-weight: lighter;
   padding-left: 1px;
 }
 
-.Balance button {
+.Balance .Balance__add-btn {
   float: right;
-  background: #43aa8b;
+  background: var(--primary-color);
   border: none;
-  color: white;
+  color: var(--primary-text-color);
   font-size: 28px;
-  width: 40px;
-  height: 40px;
-  border-radius: 2px;
+  width: calc(var(--container-base-padding) * 2);
+  height: calc(var(--container-base-padding) * 2);
 }

@@ -1,0 +1,14 @@
+:root {
+  --app-base-width: 400px;
+  --app-base-font-family: 'Open Sans';
+
+  --container-base-padding: 20px;
+
+  --text-color: #577590;
+  --primary-color: #43aa8b;
+  --light-color: #f0efeb;
+  --dark-color: #3d405b;
+  --alert-color: #f94144;
+
+  --primary-text-color: white;
+}

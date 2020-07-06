@@ -4,8 +4,7 @@ ul.TransactionList {
 }
 
 ul.TransactionList li {
-  padding-top: 20px;
-  padding-bottom: 20px;
+  padding: var(--container-base-padding) 0;
   border-bottom: 1px solid #f0efeb;
   transition: height 0.9 ease-in;
   overflow: hidden;
@@ -16,23 +15,22 @@ ul.TransactionList li:last-child {
   padding-bottom: 0;
 }
 
-ul.TransactionList li b {
-  padding-right: 80px;
+ul.TransactionList li .TransactionList__item-description {
   font-size: 20px;
-  color: #3d405b;
+  color: var(--dark-color);
 }
 
-ul.TransactionList li i {
-  color: #43aa8b; /*#f94144;*/
+ul.TransactionList li .TransactionList__item-value {
+  color: var(--primary-color); /*#f94144;*/
   float: right;
 }
 
-ul.TransactionList li i.negative {
-  color: #f94144;
+ul.TransactionList li .TransactionList__item-value.negative {
+  color: var(--alert-color);
 }
 
-ul.TransactionList li small {
+ul.TransactionList li .time {
   display: block;
-  color: #577590;
+  color: var(--text-color);
   padding-top: 10px
 }

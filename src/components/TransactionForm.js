@@ -26,7 +26,7 @@ function Field({ id, type, onChange, value, placeholder, children }) {
         value={value}
         type={type}
         placeholder={placeholder}
-        autocomplete="off"
+        autoComplete="off"
         onChange={onChange}/>
     </div>
   );
@@ -54,6 +54,7 @@ export default function TransactionForm({ onAdd, onClose }) {
 
       <Field
         id="description"
+        label="description"
         type="text"
         value={description}
         placeholder="a coffee, a donut, mommy's deposit"
@@ -64,12 +65,13 @@ export default function TransactionForm({ onAdd, onClose }) {
       <Field
         id="value"
         type="number"
+        label="value"
         placeholder="R$ 5,00"
         value={value}
         onChange={eventValue(setValue, parseFloat)}>
         Value
 
-        <button
+        {/*<button
           className={classnames({
             InputTypeButton: true,
             input: value >= 0,
@@ -77,7 +79,7 @@ export default function TransactionForm({ onAdd, onClose }) {
           })}
           onClick={() => (!isEmpty(value) && setValue(-value))}>
           {value >= 0 ? '+input' : '-output'}
-        </button>
+        </button>*/}
       </Field>
 
       <div className="field">

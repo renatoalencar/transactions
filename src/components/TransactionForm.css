@@ -5,38 +5,34 @@
 .form .field label {
   font-size: 18px;
   font-weight: bold;
-  color: #577590;
-  padding: 10px 20px;;
+  color: var(--text-color);
+  padding: var(--container-base-padding);
   display: block;
 }
 
 .form .field input {
   border: none;
-  background: #f0efeb;
-  width: calc(100% - 40px);
-  padding: 20px 20px;
+  background: var(--light-color);
+  width: calc(100% - (var(--container-base-padding) * 2));
+  padding: var(--container-base-padding);
+  padding-botom: calc(var(--container-base-padding) / 2);
   font-size: 14px;
-  color: #3d405b;
-}
-
-.form .field:last-child * {
-  border-bottom-left-radius: 10px;
-  border-bottom-right-radius: 10px;
+  color: var(--dark-color);
 }
 
 .field button {
-  background: #43aa8b;
+  background: var(--primary-color);
   border: none;
-  color: white;
+  color: var(--primary-text-color);
   font-size: 18px;
   width: 100%;
   height: 50px;
 }
 
 .form header {
-  padding: 20px;
-  font-size: 20px;
-  color: #43aa8b;
+  padding: var(--container-base-padding);
+  font-size: 24px;
+  color: var(--primary-color);
   font-weight: bold;
 }
 
@@ -59,13 +55,14 @@
 }
 
 .TransactionForm .field .InputTypeButton.input {
-  color: #43aa8b;
+  color: var(--primary-color);
 }
 
 .TransactionForm .field .InputTypeButton.output {
-  color: #f94144;
+  color: #;
 }
 
 .TransactionForm {
-  width: 340px;
+  max-width: var(--app-base-width);
+  width: 100%;
 }

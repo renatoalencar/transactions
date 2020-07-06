@@ -8,10 +8,15 @@ function Balance({ transactions, onAdd }) {
 
   return (
     <div className="Balance">
-      <span>Balance</span>
+      <span className="Balance__label">Balance</span>
       {formatCurrency(total)}
 
-      <button aria-label="add" onClick={onAdd}>+</button>
+      <button
+        className="Balance__add-btn"
+        aria-label="add"
+        onClick={onAdd}>
+        +
+      </button>
     </div>
   );
 }

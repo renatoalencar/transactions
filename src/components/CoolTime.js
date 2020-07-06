@@ -4,7 +4,7 @@ import moment from 'moment';
 export default function CoolTime({ time }) {
   const [relative, setRelative] = useState(true);
 
-  return <small onClick={() => setRelative(!relative)}>
+  return <small className="time" onClick={() => setRelative(!relative)}>
            {relative
             ? moment(time).fromNow()
             : moment(time).format('llll')}

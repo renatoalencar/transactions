@@ -1,5 +1,6 @@
 body {
-  font-family: 'Open Sans';
+  font-family: var(--app-base-font-family);
+  margin: 0;
 }
 
 .hidden {
@@ -7,13 +8,21 @@ body {
 }
 
 .box {
-  font-family: 'Open Sans';
+  font-family: var(--app-base-font-family);
   -webkit-box-shadow: -3px 7px 27px 0px rgba(0,0,0,0.33);
   -moz-box-shadow: -3px 7px 27px 0px rgba(0,0,0,0.33);
   box-shadow: -3px 7px 27px 0px rgba(0,0,0,0.33);
-  width: 300px;
-  border-radius: 10px;
-  padding: 20px;
+  max-width: calc(var(--app-base-width) - var(--container-base-padding));
+  width: calc(100% - var(--container-base-padding) * 2);
+  padding: var(--container-base-padding);
+}
+
+@media screen and (max-width: 414px) {
+  .box {
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+  }
 }
 
 .box.form {

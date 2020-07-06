@@ -2,13 +2,19 @@
 .EmptyState {
   font-size: 12px;
   padding: 15px 0;
-  color: #577590;
+  color: var(--text-color);
   text-align: center;
 }
 
 
 .App .clear {
   border: none;
-  color: #577590;
+  color: var(--text-color);
   background: none;
+}
+
+.App {
+  max-width: var(--app-base-width);
+  width: 100%;
+  margin: auto;
 }
