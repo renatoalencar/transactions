@@ -18,8 +18,11 @@
   background: none;
   border: none;
   font-size: 30px;
+  height: 35px;
+  width: 35px;
   float: right;
   transform: rotate(45deg);
+  -webkit-appearance:none;
 }
 
 .TransactionForm .field .InputTypeButton {
