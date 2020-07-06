@@ -60,25 +60,29 @@ describe('adding transaction', () => {
     test('with description empty', () => {
       const app = render(<App />);
 
+      fireEvent.click(app.getByText(/add/i));
       fireEvent.change(app.getByLabelText(/value/i), {
         target: { value: '2.75' },
       });
       /* The description field is left empty */
-      fireEvent.click(app.getByText(/add/i));
+      fireEvent.click(app.getByText(/done/i));
 
       expect(app.queryAllByText('R$2.75')).toHaveLength(0);
+      expect(app.queryAllByText(/description should not be empty/i)).toHaveLength(1);
     });
 
     test('with value empty', () => {
       const app = render(<App />);
 
+      fireEvent.click(app.getByText(/add/i));
       fireEvent.change(app.getByLabelText(/description/i), {
         target: { value: 'a coffee' },
       });
       /* The value field is left empty */
-      fireEvent.click(app.getByText(/add/i));
+      fireEvent.click(app.getByText(/done/i));
 
       expect(app.queryAllByText('a coffee')).toHaveLength(0);
+      expect(app.queryAllByText(/value can not be empty or in an invalid format/i)).toHaveLength(1);
     });
   });
 });

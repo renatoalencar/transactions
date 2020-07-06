@@ -1,0 +1,38 @@
+.form .field {
+  overflow: hidden;
+}
+
+.form .field label {
+  font-size: 18px;
+  font-weight: bold;
+  color: var(--text-color);
+  padding: var(--container-base-padding);
+  display: block;
+}
+
+.form .field input {
+  border: 1px solid var(--light-color);
+  background: var(--light-color);
+  width: calc(100% - (var(--container-base-padding) * 2));
+  padding: var(--container-base-padding);
+  padding-botom: calc(var(--container-base-padding) / 2);
+  font-size: 14px;
+  color: var(--dark-color);
+}
+
+.form .field .ErrorList {
+  padding: 5px 20px;
+  margin: 0;
+  list-style: none;
+  font-size: 11px;
+  color: var(--alert-color);
+}
+
+.form .field.invalid input {
+  border: 1px solid var(--alert-color);
+  width: calc(100% - (var(--container-base-padding) * 2) - 2px);
+}
+
+.form .field.invalid label {
+  padding-bottom: 0;
+}

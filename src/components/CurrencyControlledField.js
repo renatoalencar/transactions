@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { isEmpty, test, pipe, prop } from 'ramda';
-import { formatCurrency } from '../util';
 import Field from './Field';
 
 function parseCurrency(s) {
- return parseFloat(s.toString().replace(/[R$\s]*/g, ''));
+ return parseFloat(String(s).replace(/[R$\s]*/g, ''));
 }
 
 const isPartialyValid = test(/^-?R?\$?\s*-?[0-9]*[.,]?[0-9]*$/);
@@ -13,7 +12,7 @@ function isCompletelyValid(val) {
   return Number.isFinite(val) && !Number.isNaN(val);
 }
 
-export default function CurrencyControlledField({ id, placeholder, value, onChange, children }) {
+export default function CurrencyControlledField({ value, onChange, ...props }) {
   const [localValue, setValue] = useState(value);
 
   function setUpstream(val) {
@@ -46,10 +45,8 @@ export default function CurrencyControlledField({ id, placeholder, value, onChan
   }, [value]); /* eslint-disable-line react-hooks/exhaustive-deps */
 
   return <Field
-           id={id}
            type="text"
-           placeholder={placeholder}
            value={localValue}
            onChange={pipe(prop('target'), prop('value'), validate)}
-           children={children}/>;
+           {...props}/>;
 }
