@@ -70,17 +70,21 @@ export default function TransactionForm({ onAdd, onClose }) {
         value={value}
         onChange={eventValue(setValue, parseFloat)}>
         Value
+      </Field>
 
-        {/*<button
+
+      <div className="field">
+        <button
           className={classnames({
             InputTypeButton: true,
             input: value >= 0,
             output: value < 0,
+            hidden: !Number.isFinite(value),
           })}
           onClick={() => (!isEmpty(value) && setValue(-value))}>
-          {value >= 0 ? '+input' : '-output'}
-        </button>*/}
-      </Field>
+            {value >= 0 ? '+ Input' : '- Output'}
+        </button>
+      </div>
 
       <div className="field">
         <button onClick={addTransaction}>Done</button>

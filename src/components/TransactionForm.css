@@ -47,11 +47,10 @@
 .TransactionForm .field .InputTypeButton {
   background: none;
   display: inline;
-  float: right;
   width: auto;
   height: auto;
   font-size: 14px;
-  margin-top: 2px;
+  padding: 10px 20px;
 }
 
 .TransactionForm .field .InputTypeButton.input {
@@ -59,7 +58,7 @@
 }
 
 .TransactionForm .field .InputTypeButton.output {
-  color: #;
+  color: var(--alert-color);
 }
 
 .TransactionForm {
