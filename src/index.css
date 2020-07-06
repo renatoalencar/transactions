@@ -17,6 +17,7 @@ body {
   padding: var(--container-base-padding);
 
   margin-top: var(--container-base-padding);
+  margin-bottom: var(--container-base-padding);
 }
 
 @media screen and (max-width: 414px) {
@@ -26,6 +27,7 @@ body {
     box-shadow: none;
 
     margin-top: 0;
+    margin-bottom: 0;
   }
 }
 
