@@ -1,8 +1,7 @@
 import React, { memo } from 'react';
-
-import './TransactionList.css';
-import CoolTime from './CoolTime';
 import { classnames, formatCurrency, compareTransactions } from '../util';
+import CoolTime from './CoolTime';
+import './TransactionList.css';
 
 function TransactionList({ transactions }) {
   return (

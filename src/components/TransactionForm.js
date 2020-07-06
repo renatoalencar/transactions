@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { isEmpty, prop, when, pipe } from 'ramda';
-
-import { classnames, formatCurrency } from '../util';
-import './TransactionForm.css';
+import { classnames } from '../util';
 import Field from './Field';
 import CurrencyControlledField from './CurrencyControlledField';
+import './TransactionForm.css';
 
 const eventValue = pipe(prop('target'), prop('value'));
 

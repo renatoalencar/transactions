@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import {
-    isEmpty, test, pipe, prop
-} from 'ramda';
+import { isEmpty, test, pipe, prop } from 'ramda';
 import { formatCurrency } from '../util';
 import Field from './Field';
 
@@ -35,10 +33,17 @@ export default function CurrencyControlledField({ id, placeholder, value, onChan
   }
 
   useEffect(() => {
-    if (!isEmpty(value) && parseCurrency(localValue) !== value) {
-      setValue(formatCurrency(value));
+    if (isEmpty(value)) {
+      setValue('');
+      return;
     }
-  }, [value]);
+
+    if (parseCurrency(localValue) === value) {
+      return;
+    }
+
+    setValue(value);
+  }, [value]); /* eslint-disable-line react-hooks/exhaustive-deps */
 
   return <Field
            id={id}
