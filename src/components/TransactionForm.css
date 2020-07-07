@@ -1,4 +1,4 @@
-.field button {
+.TransactionForm .TransactionForm__done-btn {
   background: var(--primary-color);
   border: none;
   color: var(--primary-text-color);
@@ -7,14 +7,14 @@
   height: 50px;
 }
 
-.form header {
+.TransactionForm .TransactionForm__header {
   padding: var(--container-base-padding);
   font-size: 24px;
   color: var(--primary-color);
   font-weight: bold;
 }
 
-.form header button.close {
+.TransactionForm .TransactionForm__header .TransactionForm__close-btn {
   background: none;
   border: none;
   font-size: 30px;
@@ -25,7 +25,7 @@
   -webkit-appearance:none;
 }
 
-.TransactionForm .field .InputTypeButton {
+.TransactionForm .Field .Field__input-type-btn {
   background: none;
   display: inline;
   width: auto;
@@ -34,15 +34,16 @@
   padding: 10px 20px;
 }
 
-.TransactionForm .field .InputTypeButton.input {
+.TransactionForm .Field .Field__input-type-btn.input {
   color: var(--primary-color);
 }
 
-.TransactionForm .field .InputTypeButton.output {
+.TransactionForm .Field .Field__input-type-btn.output {
   color: var(--alert-color);
 }
 
 .TransactionForm {
   max-width: var(--app-base-width);
   width: 100%;
+  padding: 0;
 }

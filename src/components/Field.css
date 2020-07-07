@@ -1,8 +1,8 @@
-.form .field {
+.Field {
   overflow: hidden;
 }
 
-.form .field label {
+.Field .Field__label {
   font-size: 18px;
   font-weight: bold;
   color: var(--text-color);
@@ -10,7 +10,7 @@
   display: block;
 }
 
-.form .field input {
+.Field .Field__input {
   border: 1px solid var(--light-color);
   background: var(--light-color);
   width: calc(100% - (var(--container-base-padding) * 2));
@@ -20,7 +20,7 @@
   color: var(--dark-color);
 }
 
-.form .field .ErrorList {
+.Field .Field__ErrorList {
   padding: 5px 20px;
   margin: 0;
   list-style: none;
@@ -28,11 +28,11 @@
   color: var(--alert-color);
 }
 
-.form .field.invalid input {
+.Field.invalid .Field__input {
   border: 1px solid var(--alert-color);
   width: calc(100% - (var(--container-base-padding) * 2) - 2px);
 }
 
-.form .field.invalid label {
+.Field.invalid .Field__label {
   padding-bottom: 0;
 }

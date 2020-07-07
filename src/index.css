@@ -31,11 +31,6 @@ body {
   }
 }
 
-.box.form {
-  padding: 0;
-}
-
-
 button:focus, input:focus {
   outline: 0;
 }

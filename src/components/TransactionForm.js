@@ -76,10 +76,10 @@ export default function TransactionForm({ onAdd, onClose }) {
   }
 
   return (
-    <div className="TransactionForm box form">
-      <header>
+    <div className="TransactionForm box">
+      <header className="TransactionForm__header">
         Add a transaction
-        <button className="close" onClick={pipe(clearForm, onClose)}>+</button>
+        <button className="TransactionForm__close-btn" onClick={pipe(clearForm, onClose)}>+</button>
       </header>
 
       <Field
@@ -126,10 +126,10 @@ export default function TransactionForm({ onAdd, onClose }) {
       </CurrencyControlledField>
 
 
-      <div className="field">
+      <div className="Field">
         <button
           className={classnames({
-            InputTypeButton: true,
+            'Field__input-type-btn': true,
             input: value >= 0,
             output: value < 0,
             hidden: !Number.isFinite(value),
@@ -139,8 +139,8 @@ export default function TransactionForm({ onAdd, onClose }) {
         </button>
       </div>
 
-      <div className="field">
-        <button onClick={addTransaction}>Done</button>
+      <div className="Field">
+        <button className="TransactionForm__done-btn" onClick={addTransaction}>Done</button>
       </div>
     </div>
   );
