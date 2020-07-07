@@ -203,3 +203,33 @@ em consideração com a formatação pensei que poderia ser interessante usar `I
 é nativo dos browsers modernos para lidar com a formatação de valores monetários.
 A moeda usada é o Real, porém a aplicação formata baseada nas configurações do brower
 onde a aplicação está funcionando.
+
+Contribuindo
+---
+
+Até esse ponto você já deve ter se familirizado com as decisões de projeto e portanto
+deve entender como o projeto está estruturado. Esse app foi criado usando o Create React
+App e pode ser rodado e testado apenas com comandos básicos do npm como `npm test`, `npm start`
+e `npm run build`.
+
+Se precisar adicionar algum CSS externo, faça isso no `index.html` no diretório `public`. Componentes
+devem ser adicionados em `src/components` e siga os padrões estabelecidos para nomes
+de arquiivos, se você possui um componente chamado `Component`, você deve criar todos os
+arquivos relacionados seguindo o mesmo padrão:
+
+* `Component.js` - Para o componente em si;
+* `Component.test.js` - Para os testes do componente;
+* `Component.css` - Para os estilos relacionados ao componente.
+
+Componentes devem estar contidos dentro do próprio arquivo se tiverem uso geral ou poderem
+ser reusados de alguma forma. Hooks com efeitos globais ou que isolem alguma coisa podem ser
+colocados no arquivo `effects.js`. E estilos globais em `index.css`.
+
+Antes de abrir um Pull Request, garanta que a funcionalidade que você está adicionando está
+coberta por testes, principalmente se essa for crítica no fluxo de funcionamento normal
+da aplicação. Estruture os testes beseados nas interfaces e comportamentos das coisas
+e evite contato com as partes internas do componente, prefira teste em blackbox.
+
+Se seu Pul Request adiciona dependencias tente descrever e ponderar efeitos futuros e
+vantagens que adicionar essa nova dependencia pode trazer. Além disso tente garantir
+que a dependencia adicionada tem boa manutenção contínua.
