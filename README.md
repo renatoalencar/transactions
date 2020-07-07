@@ -1,68 +1,205 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Magnetis Transaction Manager - Coding Challenge
+===========
 
-## Available Scripts
+![Lista de transações](./docs/transactions-list.png)
+![Formulário de transação](./docs/transaction-form.png)
 
-In the project directory, you can run:
+Projeto desenvolvido com base no coding chanllenge da Magnetis para
+a vaga de Pessoa Desenvolvedora (React Native).
 
-### `npm start`
+Instalação
+---
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Basta ir na raiz do projeto e dar um `npm install` e tudo instala tranquilamente.
+Não há nenhuma outra dependencia além das listadas no `package.json`, além de um
+browser talvez e o Node.js, eu recomendo usar a versão LTS (atualmente o 12) em
+diante.
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+Rodando
+---
 
-### `npm test`
+Mais uma vez, é bem simples, basta um `npm start`. O browser deve abrir automaticamente
+mas caso não acontecer você pode ir em http://localhost:3000/.
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Racional
+---
 
-### `npm run build`
+Eu decidi criar uma aplicação simples em React, que implementasse os requisitos, que
+o processo de desenvolvimento fosse rápido e que eu podesse ainda ter tempo de refinar
+a UX do projeto.
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+O projeto foi iniciado usando o Create React App e continua usando o `react-scripts` para
+automatizar boa parte do tooling, como building, teste e linting.
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+**Modelando os dados**
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Baseado na lista de requisitos, em especial no um, inicialemente eu decidi que a aplicação
+teria uma lista (um Array comum no JavaScript) com objetos que representariam as transações,
+cada transação tem uma `description` e um `value`, onde um é uma `string` e o outro pode ser
+um `number`. Dada as circunstancias, acredito que seria interessante usar `Decimal` como forma
+de lidar com problemas de ponto flutuante, porém dada a adicional complexidade e o fato de não
+estar listado nos requisitos preferi por não ter suporte inicialmente. Por fim, o estado global
+poderia ser algo assim:
 
-### `npm run eject`
+```js
+[
+  {
+    description: 'a coffee',
+    value: 2.55,
+  },
+]
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+Ainda nos requisitos é informado que deve se ordenar as transações em ordem decrescente.
+Eu poderia apenas me basear na ordem em que os items que foram inseridos na lista, porém
+ordenação ímplicita funcionando dessa forma pode ser um tanto imprevisível, por isso preferi
+por adicionar um campo `createdAt` com o timestamp de quando foi inserida a transação, assim
+indendente da ordem que os itens estejam na lista, podem ser organizados da forma necessária.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```js
+[
+  {
+    description: 'a coffee',
+    value: 2.55,
+    createdAt: 1594082752581,
+  },
+]
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+Com tudo, as transações são listadas, e listas em React devem ter uma chave que permite uma
+inserção ou remoção com boa performance. Assim é necessário adicionar uma chave para cada
+transação para ser usada na lista. Preferi por usar um UUID direto no objeto, já que facilitaria
+uma possível integração com outras coisas como um backend.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+Por fim o estado global ficou modelado assim:
 
-## Learn More
+```js
+[
+  {
+    id: '6d479ee8-0010-441d-bfc8-c27fc2bd7455',
+    description: 'a coffee',
+    value: 2.55,
+    createdAt: 1594082752581,
+  },
+]
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+**Transações como React Hooks**
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Com os dados modelados eu precisaria de alguma lógica para poder lidar com eles, cada vez que uma
+transação é criada tem que adicionar o UUID e o timestamp. Cada vez que a lista for alterada eu tenho
+que persistir, assim que iniciar a aplicação eu devo carregar as transações salvas no local storage e
+ainda permitir alguma forma de limpar tudo, como feature mas também para facilitar na hora dos testes.
 
-### Code Splitting
+Dado isso eu encapsulei tudo eu um Hook que pode ser usado da seguinte forma:
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+```js
+function Component() {
+  const [transactions, addTransaction, clearTransactions] = useTransactions();
+  
+  ...
+}
+```
 
-### Analyzing the Bundle Size
+E o `useTransactions` lida com o resto.
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
+**Como os testes foram modelados**
 
-### Making a Progressive Web App
+Os testes que foram definidos em `App.test.js` são baseados nos requisitos funcionais
+definidos no documento de requisitos que me foi enviado. Inicialmente eu iterei sobre
+cada um dos requisitos implementando os testes e depois o código de cada um deles.
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
+Os outros testes dos componentes dentro do diretório `components` são para garantir
+de forma esperada e que não "quebrem" enquanto estiverem sendo usados. Para esse projeto
+eles são o equivalente a unit tests. Alguns requisitos funcionais também estão definidos
+como testes unitários, mas porque seria mais fácil de implementar assim em alguns casos.
 
-### Advanced Configuration
+O nome dos arquivos de testes seguem o padrão de que componente estão testando algo como
+`<componente>.test.js`.
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
+**Estilos**
 
-### Deployment
+Inicialmente eu defini alguns componentes principais, que guardariam apenas o estilo, e
+usaria essas classes para definir estilos mais gerais. Cada uma dessas foi para o `index.css`
+e estilos que são exclusivos ficam em um arquivo com um nome semelhante ao do componente
+como `<componente>.css`. Assim não se cria um estrutura de diretórios muito grande e ainda assim
+os arquivos ficam sempre próximos uns dos outros na listagem.
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
+Um componente normalmente tem uma classe CSS com o nome do componente e para estilos de
+elementos específicos dentro do componente eu uso algo próximo do padrão BEM para
+especificar. Algo como `.TransactionForm__close-btn` para definir o botão de fechar
+do formulário de criar transações. Para modificadores dentro do CSS sempre adiciono junto com
+o nome da classe que está sendo modificada, se o modificador for exclusívo dessa classe.
 
-### `npm run build` fails to minify
+Coisas como cores e tamanhos base e cores eu defini em um arquivo `variables.css`, assim
+pode-se alterar o tema do projeto de precisar alterar muita coisa. Apenas os tamanhos das
+fontes ficaram de fora, por não ter padronizado o tamanho delas.
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+**Sobre o Ramda**
+
+Ramda é uma biblioteca para programação funcional para JavaScript, decidi usar ela para
+fazer interface com os componentes, como consigo implementar quase tudo que posso
+fazer em JavaScript acabo deixando o código mais limpo devido a quantidade de sintaxe
+que deixa de ser usada na criação do componente. Além disso aproveito a natureza da
+programação funcional para evitar comportamentos imprevisíveis nas interfaces com
+os componentes.
+
+O primeiro caso que achei interessante foi para acessar o valor do input relacionado
+a um evento que eu recebo. Ao invés de fazer isso:
+
+```jsx
+<Component
+  onChange={(e) => setValue(e.target.value)}/>
+```
+
+Faço isso:
+
+```jsx
+const eventValue = pipe(prop('target'), prop('value'));
+
+<Component
+  onChange={pipe(eventValue, setValue)}/>
+```
+
+Para calcular o saldo:
+
+```jsx
+/* Puro JS */
+const balance = transactions.map(t => t.value).reduce((a, b) => a + b, 0);
+
+/* Com Ramda */
+const balance = pipe(
+  map(prop('value')),
+  reduce(add, 0)`,
+)(transactions);
+```
+
+**Por que não usei Redux?**
+
+Ao invés de usar Redux ou outra lib para gerenciar estado eu usei apenas React Hooks, o
+único estado global que a aplicação possui é a lista de transações e usar alguma lib de
+gerenciamento de estado iria adicionar boilerplate considerável para algo assim.
+
+**Por que não usei Sass?**
+
+Adicionar Sass envolveria adicionar mais uma ferramente ao pipeline de build, que poderia
+eventualmente aumentar o tempo de build e o tempo de desenvolvimento para um projeto
+que o CSS não acaba sendo tão complexo e é bem fácil de lidar. Para projetos maiores
+com interfaces mais complicadas seria mais interessante.
+
+Além disso tem-se a complexidade de ser fazer o setup do `node-sass`.
+
+**Por que não usei Bootstrap ou algo assim?**
+
+Como mencionei anteriormente, o projeto é bem simples, e não acho tão necessário
+assim uma ferramenta como Bootstrap se é possível implementar tudo somenete com CSS.
+Apesar de alguns problemas de compatibilidade entre browsers, mas acredito que não venha
+ao caso aqui.
+
+**Sobre moedas e formatação**
+
+Foi pedido que a moeda utilizada como base fosse explicitamente o Real, levando isso
+em consideração com a formatação pensei que poderia ser interessante usar `Intl`, que
+é nativo dos browsers modernos para lidar com a formatação de valores monetários.
+A moeda usada é o Real, porém a aplicação formata baseada nas configurações do brower
+onde a aplicação está funcionando.
