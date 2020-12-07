@@ -1,11 +1,8 @@
-Magnetis Transaction Manager - Coding Challenge
+Transaction Manager
 ===========
 
 ![Lista de transações](./docs/transactions-list.png)
 ![Formulário de transação](./docs/transaction-form.png)
-
-Projeto desenvolvido com base no coding chanllenge da Magnetis para
-a vaga de Pessoa Desenvolvedora (React Native).
 
 Instalação
 ---
